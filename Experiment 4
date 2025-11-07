@@ -1,0 +1,24 @@
+import java.util.PriorityQueue;
+
+public class MemoryManagementOptimalMerge {
+    public static int optimalMergeCost(int[] blocks) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (int block : blocks) {
+            minHeap.add(block);
+        }
+        int totalCost = 0;
+        while (minHeap.size() > 1) {
+            int first = minHeap.poll();
+            int second = minHeap.poll();
+            int merged = first + second;
+            totalCost += merged;
+            minHeap.add(merged);
+        }
+        return totalCost;
+    }
+    public static void main(String[] args) {
+        int[] freeBlocks = {20, 30, 10, 5, 15};
+        int cost = optimalMergeCost(freeBlocks);
+        System.out.println("Minimum total merge cost for memory blocks: " + cost);
+    }
+}
