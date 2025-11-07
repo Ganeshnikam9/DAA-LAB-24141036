@@ -1,0 +1,30 @@
+import java.util.*;
+
+class Phonebook{
+    static int bin(int si,int ei,Long key,Long[] arr){
+        if(si>ei) return -1;
+        int mid=si+(ei-si)/2;
+        if(arr[mid].equals(key)) return mid;
+        else if(arr[mid]>key) return bin(si,mid-1,key,arr);
+        else return bin(mid+1,ei,key,arr);
+    }
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        HashMap<Long,String> s=new HashMap<>();
+        s.put(9370156300L,"Harshad");
+        s.put(987654321L,"Vaibhav");
+        s.put(8421921166L,"Prasad");
+        s.put(9359404704L,"Samarth");
+        s.put(9860099236L,"Aayush");
+        Long arr[]=new Long[s.size()];
+        int i=0;
+        for(Long k:s.keySet()) arr[i++]=k;
+        Arrays.sort(arr);
+        System.out.println("enter contact no to search");
+        Long key=sc.nextLong();
+        int result=bin(0,s.size()-1,key,arr);
+        if(result==-1) System.out.println("wrong no");
+        else System.out.println(key+" - "+s.get(key));
+        sc.close();
+    }
+}
